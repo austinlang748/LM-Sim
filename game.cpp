@@ -2,12 +2,17 @@
  * LM Simulator
  **********************************************************************/
 
+#include <vector>
+
 #include "point.h"
 #include "uiInteract.h"
 #include "uiDraw.h"
 #include "ground.h"
 #include "LM.h"
 #include "star.h"
+
+const int STARS_AMOUNT = 100;
+
 using namespace std;
 
 /*************************************************************************
@@ -17,21 +22,57 @@ class Game
 {
 public:
    Game(const Point& ptUpperRight) :
-          angle(0.0),
-          ptStar(ptUpperRight.getX() - 20.0, ptUpperRight.getY() - 20.0),
-          ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
+          lm(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
           ground(ptUpperRight)
    { 
-      phase = random(0, 255);
+      // create stars to be put on the screen
+      for (int i = 0; i < STARS_AMOUNT; i++)
+         stars.push_back(Star());
+
+      // set other attributes
+      angle = 0.0;
    }
 
+   void update(const Interface *pUI)
+   {
+      // move the ship around
+      if (pUI->isRight())
+         lm.addX(-1.0);
+      if (pUI->isLeft())
+         lm.addX(1.0);
+      if (pUI->isUp())
+         lm.addY(-1.0);
+      if (pUI->isDown())
+         lm.addY(1.0);
+   }
+
+   void draw(ogstream & gout) const
+   {
+      // draw the ground
+      ground.draw(gout);
+
+      // draw the lander and its flames
+      gout.drawLander(lm /*position*/, angle /*angle*/);
+      gout.drawLanderFlames(lm, angle, /*angle*/
+                     pUI->isDown(), pUI->isLeft(), pUI->isRight());
+
+      // put some text on the screen
+      gout.setPosition(Point(30.0, 30.0));
+      gout << "Game (" << (int)lm.getX() << ", " << (int)lm.getY() << ")" << "\n";
+
+      // draw our little star
+      for (vector::iterator it = stars.begin(); it != stars.end(); ++it)
+         (*it)->draw(gout);
+   }
+
+private:
    // this is just for test purposes.  Don't make member variables public!
-   Point ptLM;           // location of the LM on the screen
-   Point ptUpperRight;   // size of the screen
-   double angle;         // angle the LM is pointing
-   unsigned char phase;  // phase of the star's blinking
-   Ground ground;
-   Point ptStar;
+   Point lm;               // lunar module object
+   Ground ground;          // object to keep track of ground attributes
+   vector<Star> stars;     // dynamic list to keep track of stars
+   Point ptUpperRight;     // size of the screen
+   double angle;           // angle the LM is pointing
+   unsigned char phase;    // phase of the star's blinking
 };
 
 /*************************************
@@ -49,31 +90,12 @@ void callBack(const Interface *pUI, void * p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Game * pGame = (Game *)p;  
-
-   // move the ship around
-   if (pUI->isRight())
-      pGame->ptLM.addX(-1.0);
-   if (pUI->isLeft())
-      pGame->ptLM.addX(1.0);
-   if (pUI->isUp())
-      pGame->ptLM.addY(-1.0);
-   if (pUI->isDown())
-      pGame->ptLM.addY(1.0);
-
-   // draw the ground
-   pGame->ground.draw(gout);
-
-   // draw the lander and its flames
-   gout.drawLander(pGame->ptLM /*position*/, pGame->angle /*angle*/);
-   gout.drawLanderFlames(pGame->ptLM, pGame->angle, /*angle*/
-                    pUI->isDown(), pUI->isLeft(), pUI->isRight());
-
-   // put some text on the screen
-   gout.setPosition(Point(30.0, 30.0));
-   gout << "Game (" << (int)pGame->ptLM.getX() << ", " << (int)pGame->ptLM.getY() << ")" << "\n";
-
-   // draw our little star
-   gout.drawStar(pGame->ptStar, pGame->phase++);
+   
+   // Elijah:
+   // Let game handle specific tasks by calling 
+   // game::update() and game::draw()
+   pGame->update();
+   pGame->draw(gout);
 }
 
 /*********************************

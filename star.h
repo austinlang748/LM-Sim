@@ -13,10 +13,10 @@ class Star {
 public:
     Star() {
         // initialize point
-        point = Point(random(0, 400), random(0, 400));
+        point.set(random(0, 400), random(0, 400));
 
         // initailize phase
-        phase = 100;
+        phase = random(0, 255);
     }
 
     void update() {

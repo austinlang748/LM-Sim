@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.csv": "csv",
+        "*.md": "markdown",
+        "vector": "cpp"
+    }
+}
