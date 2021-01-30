@@ -20,10 +20,10 @@ public:
       double degrees) :
       weight(15103.00), gravity(-1.625), thrust(45000.00)
    {
-      x = position;
-      y = altitude;
-      dx = horizontalVelocity;
-      dy = verticalVelocity;
+      pt.setX(position);
+      pt.setY(altitude);
+      v.setDX(horizontalVelocity);
+      v.setDY(verticalVelocity);
       updateAngle(degrees);
    }
 
@@ -42,8 +42,8 @@ public:
     *****************************************************************/
    void applyInertia()
    {
-      x += dx;
-      y += dy;
+      pt.addX(v.getDX);
+      pt.addY(v.getDY);
    }
 
    /*************************************************************
@@ -53,8 +53,8 @@ public:
     *****************************************************************/
    void applyThrust()
    {
-      dy += cos(angle) * thrust / weight;
-      dx += sin(angle) * thrust / weight;
+      v.addDX(cos(angle) * thrust / weight);
+      v.addDY(sin(angle) * thrust / weight);
    }
    /*************************************************************
     * APPLY GRAVITY
@@ -62,7 +62,7 @@ public:
     *****************************************************************/
    void applyGravity()
    {
-      dy += gravity;
+      v.addDY(gravity);
    }
 
    /*************************************************************
@@ -71,7 +71,7 @@ public:
     *****************************************************************/
    double totalVelocity() const
    {
-      return sqrt(dx * dx + dy * dy);
+      return v.getSpeed();
    }
 
    // The overloaded insertion operator must be declared as a friend
