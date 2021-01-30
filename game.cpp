@@ -6,6 +6,8 @@
 #include "uiInteract.h"
 #include "uiDraw.h"
 #include "ground.h"
+#include "LM.h"
+#include "star.h"
 using namespace std;
 
 /*************************************************************************
@@ -16,10 +18,10 @@ class Game
 public:
    Game(const Point& ptUpperRight) :
           angle(0.0),
+          ptStar(ptUpperRight.getX() - 20.0, ptUpperRight.getY() - 20.0),
           ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
           ground(ptUpperRight)
    { 
-
       phase = random(0, 255);
    }
 
@@ -29,6 +31,7 @@ public:
    double angle;         // angle the LM is pointing
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
+   Point ptStar;
 };
 
 /*************************************
@@ -38,6 +41,7 @@ public:
  * engine will wait until the proper amount of
  * time has passed and put the drawing on the screen.
  **************************************/
+
 void callBack(const Interface *pUI, void * p)
 {
    ogstream gout;
