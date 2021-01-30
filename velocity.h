@@ -3,6 +3,8 @@
 * Written by Austin Hilderbrand
 *************************************************/
 
+#include <cmath>
+
 class Velocity
 {
 public:
@@ -24,7 +26,27 @@ public:
 
    double getSpeed()
    {
-      return sqrt()
+      return sqrt(dx * dx + dy * dy);
+   }
+
+   void setDX(double newDX)
+   {
+      dx = newDX;
+   }
+
+   void setDY(double newDY)
+   {
+      dy = newDY;
+   }
+
+   void addDX(double dxAdd)
+   {
+      dx += dxAdd;
+   }
+
+   void addDY(double dyAdd)
+   {
+      dy += dyAdd;
    }
 
 private:
