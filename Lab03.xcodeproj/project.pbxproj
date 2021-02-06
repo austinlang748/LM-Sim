@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		C1D4EAE92577F57B002B56E3 /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EAE02577F573002B56E3 /* uiDraw.cpp */; };
 		C1D4EAEA2577F57B002B56E3 /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EAE12577F574002B56E3 /* point.cpp */; };
-		C1D4EAEB2577F57B002B56E3 /* glDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EAE22577F575002B56E3 /* glDemo.cpp */; };
 		C1D4EAEC2577F57B002B56E3 /* ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EAE32577F575002B56E3 /* ground.cpp */; };
 		C1D4EAED2577F57B002B56E3 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EAE52577F576002B56E3 /* uiInteract.cpp */; };
 		C1D4EAF22577F58C002B56E3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EAF02577F58C002B56E3 /* GLUT.framework */; };
 		C1D4EAF32577F58C002B56E3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EAF12577F58C002B56E3 /* OpenGL.framework */; };
+		EE9F1CEF25CF35EE00A6D3C6 /* star.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE9F1CEC25CF35ED00A6D3C6 /* star.cpp */; };
+		EE9F1CF025CF35EE00A6D3C6 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE9F1CEE25CF35EE00A6D3C6 /* game.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,7 +33,6 @@
 		C1D4EAD32577F487002B56E3 /* Lab03 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab03; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D4EAE02577F573002B56E3 /* uiDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uiDraw.cpp; sourceTree = "<group>"; };
 		C1D4EAE12577F574002B56E3 /* point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point.cpp; sourceTree = "<group>"; };
-		C1D4EAE22577F575002B56E3 /* glDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glDemo.cpp; sourceTree = "<group>"; };
 		C1D4EAE32577F575002B56E3 /* ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ground.cpp; sourceTree = "<group>"; };
 		C1D4EAE42577F575002B56E3 /* point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = point.h; sourceTree = "<group>"; };
 		C1D4EAE52577F576002B56E3 /* uiInteract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uiInteract.cpp; sourceTree = "<group>"; };
@@ -41,6 +41,15 @@
 		C1D4EAE82577F57A002B56E3 /* ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ground.h; sourceTree = "<group>"; };
 		C1D4EAF02577F58C002B56E3 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C1D4EAF12577F58C002B56E3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		EE9F1CE625CF35EC00A6D3C6 /* Lab03.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Lab03.vcxproj.filters; sourceTree = "<group>"; };
+		EE9F1CE725CF35EC00A6D3C6 /* LM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LM.h; sourceTree = "<group>"; };
+		EE9F1CE825CF35ED00A6D3C6 /* Lab03.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Lab03.vcxproj; sourceTree = "<group>"; };
+		EE9F1CE925CF35ED00A6D3C6 /* star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = star.h; sourceTree = "<group>"; };
+		EE9F1CEA25CF35ED00A6D3C6 /* Lab03.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Lab03.sln; sourceTree = "<group>"; };
+		EE9F1CEB25CF35ED00A6D3C6 /* packages.config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = packages.config; sourceTree = "<group>"; };
+		EE9F1CEC25CF35ED00A6D3C6 /* star.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = star.cpp; sourceTree = "<group>"; };
+		EE9F1CED25CF35EE00A6D3C6 /* velocity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = velocity.h; sourceTree = "<group>"; };
+		EE9F1CEE25CF35EE00A6D3C6 /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +68,15 @@
 		C1D4EACA2577F487002B56E3 = {
 			isa = PBXGroup;
 			children = (
-				C1D4EAE22577F575002B56E3 /* glDemo.cpp */,
+				EE9F1CEE25CF35EE00A6D3C6 /* game.cpp */,
+				EE9F1CEA25CF35ED00A6D3C6 /* Lab03.sln */,
+				EE9F1CE825CF35ED00A6D3C6 /* Lab03.vcxproj */,
+				EE9F1CE625CF35EC00A6D3C6 /* Lab03.vcxproj.filters */,
+				EE9F1CE725CF35EC00A6D3C6 /* LM.h */,
+				EE9F1CEB25CF35ED00A6D3C6 /* packages.config */,
+				EE9F1CEC25CF35ED00A6D3C6 /* star.cpp */,
+				EE9F1CE925CF35ED00A6D3C6 /* star.h */,
+				EE9F1CED25CF35EE00A6D3C6 /* velocity.h */,
 				C1D4EAE32577F575002B56E3 /* ground.cpp */,
 				C1D4EAE82577F57A002B56E3 /* ground.h */,
 				C1D4EAE12577F574002B56E3 /* point.cpp */,
@@ -149,8 +166,9 @@
 				C1D4EAED2577F57B002B56E3 /* uiInteract.cpp in Sources */,
 				C1D4EAEA2577F57B002B56E3 /* point.cpp in Sources */,
 				C1D4EAE92577F57B002B56E3 /* uiDraw.cpp in Sources */,
+				EE9F1CEF25CF35EE00A6D3C6 /* star.cpp in Sources */,
 				C1D4EAEC2577F57B002B56E3 /* ground.cpp in Sources */,
-				C1D4EAEB2577F57B002B56E3 /* glDemo.cpp in Sources */,
+				EE9F1CF025CF35EE00A6D3C6 /* game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

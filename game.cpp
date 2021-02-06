@@ -48,6 +48,10 @@ public:
 
    void draw(ogstream & gout, const Interface* pUI) const
    {
+       // draw stars
+       for (int i = 0; i < STARS_AMOUNT; i++)
+          stars[i].draw(gout);
+
       // draw the ground
       ground.draw(gout);
 
@@ -59,10 +63,6 @@ public:
       // put some text on the screen
       gout.setPosition(Point(30.0, 30.0));
       gout << "Game (" << (int)lm.getX() << ", " << (int)lm.getY() << ")" << "\n";
-
-      // draw our little star
-      for (int i = 0; i < STARS_AMOUNT; i++)
-         stars[i].draw(gout);
    }
 
 private:
