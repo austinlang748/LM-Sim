@@ -41,7 +41,7 @@ public:
    void draw(ogstream & gout, const Interface* pUI) const
    {
       // draw lander
-      gout.drawLander(point, angle);
+      gout.drawLander(point, degreesToRadians(angle - 90));
 
       // draw flames (direction based on key input)
       gout.drawLanderFlames(
@@ -76,12 +76,12 @@ private:
     *****************************************************************/
    double radiansToDegrees(double degrees) const
    {
-      return M_PI * degrees/180;
+      return 180 * degrees / M_PI;
    }
 
    double degreesToRadians(double radians) const
    {
-      return 180.0 * radians / M_PI;
+      return M_PI * radians / 180;
    }
 
    // Attribute declarations
