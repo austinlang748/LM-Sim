@@ -22,9 +22,10 @@ class Game
 {
 public:
    Game(const Point& ptUpperRight) :
-          lm(ptUpperRight),
-          ground(ptUpperRight)
-   { 
+         lm(ptUpperRight),
+         ground(ptUpperRight),
+         pause(false)
+   {
       // create stars to be put on the screen
       for (int i = 0; i < STARS_AMOUNT; i++)
          stars.push_back(Star());
@@ -35,9 +36,18 @@ public:
     
    void update()
    {
+      cout << pause << endl;
+      if (pause) return;
+
+      // update ship
       lm.update();
+
+      // update stars phases
       for (int i = 0; i < STARS_AMOUNT; i++)
          stars[i].update();
+   
+      // check for collisions
+      checkCollisions();
    }
 
    void handleInput(const Interface *pUI)
@@ -63,10 +73,19 @@ public:
    }
 
 private:
+   void checkCollisions()
+   {
+      // stop game if lm has hit the ground
+      if (ground.hitGround(lm.getPosition(), lm.getWidth()))
+         lm.setAlive(false);
+      pause = !lm.isAlive();
+   }
+
    LM lm;                  // lunar module object
    Ground ground;          // object to keep track of ground attributes
    vector<Star> stars;     // dynamic list to keep track of stars
    Point ptUpperRight;     // size of the screen
+   bool pause;             // update screen/objects?
    double angle;           // angle the LM is pointing
    unsigned char phase;    // phase of the star's blinking
 };

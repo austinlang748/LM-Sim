@@ -18,16 +18,18 @@ class LM
 {
 public:
    LM(const Point& ptUpperRight) : 
-      weight(15103),
-      thrustAmountX(45000),
-      thrustAmountY(450),
+      mass(15103),
+      width(10),
+      thrustRotateAmount(450),
+      thrustAmountY(45000),
       gravity(-1.625),
       angle(90.00),
-      fuel(25000)
+      fuel(25000),
+      alive(true)
    {
       point.set(
           ptUpperRight.getX() / 2.0,
-          ptUpperRight.getX() / 2.0
+          ptUpperRight.getX() / 1.25
       );
       center.set(point);
    }
@@ -44,8 +46,9 @@ public:
       gout.drawLander(point, degreesToRadians(angle - 90));
 
       // draw flames (direction based on key input)
+
       gout.drawLanderFlames(
-         point, angle,
+         point, degreesToRadians(angle - 90),
          pUI->isDown(), pUI->isLeft(), pUI->isRight()
       );
    }
@@ -53,6 +56,8 @@ public:
    void handleInput(const Interface * pUI)
    {
       // accerate forward when up arrow is pressed
+      if (pUI->isDown())
+         v.addMagnitude(degreesToRadians(angle), thrustAmountY);
    }
 
    void reset()
@@ -61,13 +66,14 @@ public:
       point.set(center);
    }
 
-   bool isAlive() { return alive; }
-   bool isLanded() { return landed; }
-   bool isFlying() { return !landed; }
-
-   Point getPosition() const { return point; }
-
-   double getFuel() { return fuel; }
+   bool  isAlive()      const { return alive; }
+   bool  isLanded()     const { return landed; }
+   bool  isFlying()     const { return !landed; }
+   Point getPosition()  const { return point; }
+   double getFuel()     const { return fuel; }
+   double getWidth()    const { return width; }
+   
+   void setAlive(bool value) { alive = value; }
    
 private:
    /*************************************************************
@@ -91,12 +97,11 @@ private:
    Velocity v;
    double angle;
    double fuel;
-   const double thrustAmountX;
    const double thrustAmountY;
-   const double weight;
+   const double thrustRotateAmount;
+   const double mass;
+   const double width;
    const double gravity;
    bool alive;
    bool landed;
-
-
 };
