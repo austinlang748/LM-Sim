@@ -18,15 +18,37 @@ class LM
 {
 public:
    LM(const Point& ptUpperRight) : 
-      weight(15103), vThrust(45000),
-      hThrust(450), gravity(-1.625)
+      weight(15103),
+      thrustAmountX(45000), thrustAmountY(450),
+      gravity(-1.625),
+      angle(0.00), fuel(25000)
    {
-      pt.setX(ptUpperRight.getX() / 2.0);
-      pt.setY(ptUpperRight.getY() / 2.0);
-      v.setDX(0.00);
-      v.setDY(0.00); 
-      angle = 0.00;
-      fuel = 25000;
+      point.set(
+          ptUpperRight.getX() / 2.0,
+          ptUpperRight.getX() / 2.0
+      );
+   }
+   
+   void update()
+   {
+      
+   }
+   
+   void draw(ogstream & gout, const Interface* pUI) const
+   {
+      // draw lander
+      gout.drawLander(point, angle);
+
+      // draw flames (direction based on key input)
+      gout.drawLanderFlames(
+         point, angle,
+         pUI->isDown(), pUI->isLeft(), pUI->isRight()
+      );
+   }
+   
+   void handleInput(const Interface * pUI)
+   {
+      // accerate forward when up arrow is pressed
    }
 
    void reset()
@@ -59,8 +81,6 @@ public:
 
    }
 
-   void draw(const Thrust& thrust)
-
 private:
    /*************************************************************
     * DEGREES FROM RADIANS and RADIANS FROM DEGREES
@@ -77,13 +97,15 @@ private:
    }
 
    // Attribute declarations
-   Point pt;
-   Point ptUpperRight;
+   Point point;
+   Point screenTopRight;
    Velocity v;
    double angle;
    double fuel;
+   const double thrustAmountX;
+   const double thrustAmountY;
    const double weight;
-   const double vThrust;
-   const double hThrust;
    const double gravity;
+   bool alive;
+   bool landed;
 };

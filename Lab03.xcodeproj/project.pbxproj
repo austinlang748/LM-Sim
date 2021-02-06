@@ -44,6 +44,7 @@
 		EE9F1CE925CF35ED00A6D3C6 /* star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = star.h; sourceTree = "<group>"; };
 		EE9F1CED25CF35EE00A6D3C6 /* velocity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = velocity.h; sourceTree = "<group>"; };
 		EE9F1CEE25CF35EE00A6D3C6 /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
+		EE9F1D1925CF4BD600A6D3C6 /* thrust.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = thrust.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +65,7 @@
 			children = (
 				EE9F1CEE25CF35EE00A6D3C6 /* game.cpp */,
 				EE9F1CE725CF35EC00A6D3C6 /* LM.h */,
+				EE9F1D1925CF4BD600A6D3C6 /* thrust.h */,
 				EE9F1CE925CF35ED00A6D3C6 /* star.h */,
 				C1D4EAE32577F575002B56E3 /* ground.cpp */,
 				C1D4EAE82577F57A002B56E3 /* ground.h */,

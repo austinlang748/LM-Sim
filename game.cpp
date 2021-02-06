@@ -35,20 +35,12 @@ public:
     
    void update()
    {
-        
+      lm.update();
    }
 
    void handleInput(const Interface *pUI)
    {
-      // move the ship around
-      if (pUI->isRight())
-         lm.addX(-1.0);
-      if (pUI->isLeft())
-         lm.addX(1.0);
-      if (pUI->isUp())
-         lm.addY(-1.0);
-      if (pUI->isDown())
-         lm.addY(1.0);
+      lm.handleInput(pUI);
    }
 
    void draw(ogstream & gout, const Interface* pUI) const
@@ -61,18 +53,16 @@ public:
       ground.draw(gout);
 
       // draw the lander and its flames
-      gout.drawLander(lm /*position*/, angle /*angle*/);
-      gout.drawLanderFlames(lm, angle, /*angle*/
-                     pUI->isDown(), pUI->isLeft(), pUI->isRight());
+      lm.draw();
 
       // put some text on the screen
       gout.setPosition(Point(30.0, 30.0));
-      gout << "Game (" << (int)lm.getX() << ", " << (int)lm.getY() << ")" << "\n";
+      gout << "Game (" << (int)lm.getPoisition().getX() << ", " << (int)lm.getY() << ")" << "\n";
    }
 
 private:
    // this is just for test purposes.  Don't make member variables public!
-   Point lm;               // lunar module object
+   LM lm;               // lunar module object
    Ground ground;          // object to keep track of ground attributes
    vector<Star> stars;     // dynamic list to keep track of stars
    Point ptUpperRight;     // size of the screen
