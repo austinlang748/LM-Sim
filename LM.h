@@ -75,11 +75,6 @@ private:
    {
       return 360.0 * (radians / (2.0 * M_PI));
    }
-   
-   double radiansFromDegrees(double degrees) const
-   {
-      return (2.0 * M_PI) * (degrees / 360.0);
-   }
 
    // Attribute declarations
    Point point;
