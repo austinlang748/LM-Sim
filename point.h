@@ -10,6 +10,8 @@
 
 #pragma once
 
+#include "velocity.h"
+
 #include <iostream>
 
 /*********************************************
@@ -21,7 +23,7 @@ class Point
 public:
    // constructors
    Point()            : x(0.0), y(0.0)  {}
-   Point(double x, double y);
+   Point(double x, double y) { set(x, y); }
    Point(const Point & pt) : x(pt.x), y(pt.y) {}
 
    // getters
@@ -37,25 +39,38 @@ public:
    }
 
    // setters
-   void setX(double x)       { this->x = x;           }
-   void setY(double y)       { this->y = y;           }
-   void set(Point newPoint)  {
-      setX(newPoint.getX());
-      setY(newPoint.getY());
-   }
+    void setX(double x)         { this->x = x; }
+    void setY(double y)         { this->y = y; }
 
-   void addX(double dx)      { setX(getX() + dx);     }
-   void addY(double dy)      { setY(getY() + dy);     }
-   Point & operator = (const Point & rhs)
-   {
-      x = rhs.x;
-      y = rhs.y;
-      return *this;
-   }
+    void set(Point newPoint)    { set(newPoint.x, newPoint.y); }
+
+    void set(double x, double y) {
+        this->x = x;
+        this->y = y;
+    }
+
+    void translate(Velocity v) {
+        add(v.getDX(), v.getDY());
+    }
+
+    void addX(double dx)      { setX(getX() + dx);     }
+    void addY(double dy)      { setY(getY() + dy);     }
+    
+    void add(double dx, double dy) {
+        x += dx;
+        y += dy;
+    }
+
+    Point & operator = (const Point & rhs)
+    {
+        x = rhs.x;
+        y = rhs.y;
+        return *this;
+    }
 
 private:
-   double x;           // horizontal position
-   double y;           // vertical position
+    double x;           // horizontal position
+    double y;           // vertical position
 };
 
 // stream I/O useful for debugging

@@ -32,8 +32,13 @@ public:
       // set other attributes
       angle = 0.0;
    }
+    
+   void update()
+   {
+        
+   }
 
-   void update(const Interface *pUI)
+   void handleInput(const Interface *pUI)
    {
       // move the ship around
       if (pUI->isRight())
@@ -94,8 +99,9 @@ void callBack(const Interface *pUI, void * p)
    // Elijah:
    // Let game handle specific tasks by calling 
    // game::update() and game::draw()
-   pGame->update(pUI);
+   pGame->update();
    pGame->draw(gout, pUI);
+    pGame->handleInput(pUI);
 }
 
 /*********************************
