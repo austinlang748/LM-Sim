@@ -11,16 +11,6 @@
 #include <cassert>
 
 /******************************************
- * POINT : CONSTRUCTOR WITH X,Y
- * Initialize the point to the passed position
- *****************************************/
-Point::Point(double x, double y) : x(0.0), y(0.0)
-{
-   setX(x);
-   setY(y);
-}
-
-/******************************************
  * POINT insertion
  *       Display coordinates on the screen
  *****************************************/

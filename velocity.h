@@ -3,6 +3,8 @@
 * Written by Austin Hilderbrand
 *************************************************/
 
+#pragma once
+
 #include <cmath>
 
 class Velocity
@@ -14,40 +16,19 @@ public:
       dy = dy_init;
    }
 
-   double getDX()
-   {
-      return dx;
-   }
-
-   double getDY()
-   {
-      return dy;
-   }
-
+   double getDX() { return dx; }
+   double getDY() { return dy; }
+   
    double getSpeed() const
    {
       return sqrt(dx * dx + dy * dy);
    }
 
-   void setDX(double newDX)
-   {
-      dx = newDX;
-   }
-
-   void setDY(double newDY)
-   {
-      dy = newDY;
-   }
-
-   void addDX(double dxAdd)
-   {
-      dx += dxAdd;
-   }
-
-   void addDY(double dyAdd)
-   {
-      dy += dyAdd;
-   }
+   void setDX(double newDX) { dx = newDX; }
+   void setDY(double newDY) { dy = newDY; }
+   
+   void addDX(double dxAdd) { dx += dxAdd; }
+   void addDY(double dyAdd) { dy += dyAdd; }
 
 private:
    double dx;
