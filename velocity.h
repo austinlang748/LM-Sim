@@ -29,6 +29,17 @@ public:
    
    void addDX(double dxAdd) { dx += dxAdd; }
    void addDY(double dyAdd) { dy += dyAdd; }
+   
+   void add(double ddx, double ddy)
+   {
+      addDx(ddx);
+      addDy(ddy);
+   }
+    
+   void add(Velocity acceleration)
+   {
+      add(acceleration.dx, acceleration.dy);
+   }
 
 private:
    double dx;

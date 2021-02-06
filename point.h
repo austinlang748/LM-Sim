@@ -29,44 +29,46 @@ public:
    // getters
    double getX()       const { return x;              }
    double getY()       const { return y;              }
+   
    bool operator == (const Point & rhs) const
    {
       return x == rhs.x && y == rhs.y;
    }
+   
    bool operator != (const Point & rhs) const
    {
       return x != rhs.x || y != rhs.y;
    }
 
    // setters
-    void setX(double x)         { this->x = x; }
-    void setY(double y)         { this->y = y; }
+   void setX(double x)         { this->x = x; }
+   void setY(double y)         { this->y = y; }
 
-    void set(Point newPoint)    { set(newPoint.x, newPoint.y); }
+   void set(Point newPoint)    { set(newPoint.x, newPoint.y); }
 
-    void set(double x, double y) {
-        this->x = x;
-        this->y = y;
-    }
+   void set(double x, double y) {
+      this->x = x;
+      this->y = y;
+   }
 
-    void translate(Velocity v) {
-        add(v.getDX(), v.getDY());
-    }
+   void translate(Velocity v) {
+      add(v.getDX(), v.getDY());
+   }
 
-    void addX(double dx)      { setX(getX() + dx);     }
-    void addY(double dy)      { setY(getY() + dy);     }
+   void addX(double dx) { setX(getX() + dx); }
+   void addY(double dy) { setY(getY() + dy); }
     
-    void add(double dx, double dy) {
-        x += dx;
-        y += dy;
-    }
+   void add(double dx, double dy) {
+      x += dx;
+      y += dy;
+   }
 
-    Point & operator = (const Point & rhs)
-    {
-        x = rhs.x;
-        y = rhs.y;
-        return *this;
-    }
+   Point & operator = (const Point & rhs)
+   {
+      x = rhs.x;
+      y = rhs.y;
+      return *this;
+   }
 
 private:
     double x;           // horizontal position
