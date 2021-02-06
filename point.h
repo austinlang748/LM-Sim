@@ -13,6 +13,8 @@
 #include "velocity.h"
 
 #include <iostream>
+#include <string>
+using namespace std;
 
 /*********************************************
  * POINT
@@ -27,8 +29,18 @@ public:
    Point(const Point & pt) : x(pt.x), y(pt.y) {}
 
    // getters
-   double getX()       const { return x;              }
-   double getY()       const { return y;              }
+   double getX() const { return x; }
+   double getY() const { return y; }
+   
+   string toString() const
+   {
+      string pointstr = "(";
+      pointstr += x;
+      pointstr += ", ";
+      pointstr += y;
+      pointstr += ")";
+      return pointstr;
+   }
    
    bool operator == (const Point & rhs) const
    {
@@ -57,6 +69,8 @@ public:
 
    void addX(double dx) { setX(getX() + dx); }
    void addY(double dy) { setY(getY() + dy); }
+   
+   void add(Velocity v) { add(v.getDX(), v.getDY()); }
     
    void add(double dx, double dy) {
       x += dx;
@@ -76,6 +90,6 @@ private:
 };
 
 // stream I/O useful for debugging
-std::ostream & operator << (std::ostream & out, const Point & pt);
-std::istream & operator >> (std::istream & in,        Point & pt);
+ostream & operator << (std::ostream & out, const Point & pt);
+istream & operator >> (std::istream & in,        Point & pt);
 

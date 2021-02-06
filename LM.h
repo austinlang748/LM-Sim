@@ -19,25 +19,29 @@ class LM
 public:
    LM(const Point& ptUpperRight) : 
       weight(15103),
-      thrustAmountX(45000), thrustAmountY(450),
+      thrustAmountX(45000),
+      thrustAmountY(450),
       gravity(-1.625),
-      angle(0.00), fuel(25000)
+      angle(90.00),
+      fuel(25000)
    {
       point.set(
           ptUpperRight.getX() / 2.0,
           ptUpperRight.getX() / 2.0
       );
+      center.set(point);
    }
    
    void update()
    {
-      
+      point.add(v);
+      v.addMagnitude(degreesToRadians(angle), gravity);
    }
    
    void draw(ogstream & gout, const Interface* pUI) const
    {
       // draw lander
-      gout.drawLander(point, angle);
+      gout.drawLander(point, degreesToRadians(angle - 90));
 
       // draw flames (direction based on key input)
       gout.drawLanderFlames(
@@ -53,46 +57,36 @@ public:
 
    void reset()
    {
-
+      v.set(0,0);
+      point.set(center);
    }
 
-   bool isDead()
-   {
+   bool isAlive() { return alive; }
+   bool isLanded() { return landed; }
+   bool isFlying() { return !landed; }
 
-   }
+   Point getPosition() const { return point; }
 
-   bool isLanded()
-   {
-
-   }
-
-   bool isFlying()
-   {
-
-   }
-
-   Point getPosition()
-   {
-
-   }
-
-   int getFuel()
-   {
-
-   }
-
+   double getFuel() { return fuel; }
+   
 private:
    /*************************************************************
     * DEGREES FROM RADIANS and RADIANS FROM DEGREES
     * Convert degrees to radians and vice-versa.
     *****************************************************************/
-   double degreesFromRadians(double radians) const
+   double radiansToDegrees(double degrees) const
    {
-      return 360.0 * (radians / (2.0 * M_PI));
+      return 180 * degrees / M_PI;
+   }
+
+   double degreesToRadians(double radians) const
+   {
+      return M_PI * radians / 180;
    }
 
    // Attribute declarations
    Point point;
+   Point center;
    Point screenTopRight;
    Velocity v;
    double angle;
@@ -103,4 +97,6 @@ private:
    const double gravity;
    bool alive;
    bool landed;
+
+
 };

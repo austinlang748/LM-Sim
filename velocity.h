@@ -24,16 +24,28 @@ public:
       return sqrt(dx * dx + dy * dy);
    }
 
-   void setDX(double newDX) { dx = newDX; }
-   void setDY(double newDY) { dy = newDY; }
+   void setDx(double newDX) { dx = newDX; }
+   void setDy(double newDY) { dy = newDY; }
+   void set(Velocity v) { set(v.dx, v.dy); }
    
-   void addDX(double dxAdd) { dx += dxAdd; }
-   void addDY(double dyAdd) { dy += dyAdd; }
+   void set(double dx, double dy)
+   {
+      setDx(dx);
+      setDy(dy);
+   }
+   
+   void addDx(double dxAdd) { dx += dxAdd; }
+   void addDy(double dyAdd) { dy += dyAdd; }
    
    void add(double ddx, double ddy)
    {
       addDx(ddx);
       addDy(ddy);
+   }
+   
+   void addMagnitude(double angleRad, double magnitude)
+   {
+      add(magnitude * cos(angleRad), magnitude * sin(angleRad));
    }
     
    void add(Velocity acceleration)
