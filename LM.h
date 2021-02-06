@@ -42,8 +42,8 @@ public:
     *****************************************************************/
    void applyInertia()
    {
-      pt.addX(v.getDX);
-      pt.addY(v.getDY);
+      pt.addX(v.getDX());
+      pt.addY(v.getDY());
    }
 
    /*************************************************************
@@ -73,10 +73,6 @@ public:
    {
       return v.getSpeed();
    }
-
-   // The overloaded insertion operator must be declared as a friend
-   // of the LM class to get access to its data later on. 
-   friend ostream& operator << (ostream& out, const LM& rhs);
 
 private:
    /*************************************************************

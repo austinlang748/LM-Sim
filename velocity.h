@@ -24,7 +24,7 @@ public:
       return dy;
    }
 
-   double getSpeed()
+   double getSpeed() const
    {
       return sqrt(dx * dx + dy * dy);
    }

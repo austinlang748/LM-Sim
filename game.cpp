@@ -46,7 +46,7 @@ public:
          lm.addY(1.0);
    }
 
-   void draw(ogstream & gout) const
+   void draw(ogstream & gout, const Interface* pUI) const
    {
       // draw the ground
       ground.draw(gout);
@@ -61,8 +61,8 @@ public:
       gout << "Game (" << (int)lm.getX() << ", " << (int)lm.getY() << ")" << "\n";
 
       // draw our little star
-      for (vector::iterator it = stars.begin(); it != stars.end(); ++it)
-         (*it)->draw(gout);
+      for (int i = 0; i < STARS_AMOUNT; i++)
+         stars[i].draw(gout);
    }
 
 private:
@@ -94,8 +94,8 @@ void callBack(const Interface *pUI, void * p)
    // Elijah:
    // Let game handle specific tasks by calling 
    // game::update() and game::draw()
-   pGame->update();
-   pGame->draw(gout);
+   pGame->update(pUI);
+   pGame->draw(gout, pUI);
 }
 
 /*********************************
