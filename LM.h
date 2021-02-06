@@ -3,8 +3,11 @@
  * Represents both the position and velocity of the LM.
  *****************************************************************/
 
+#include "math.h"
 #include "point.h"
 #include "velocity.h"
+#include "point.h"
+#include "thrust.h"
 
 #ifndef M_PI              // Define M_PI (within class)
 #define M_PI 3.14159265358979323846
@@ -14,80 +17,51 @@
 class LM
 {
 public:
-   LM(double altitude, double position,
-      double verticalVelocity,
-      double horizontalVelocity,
-      double degrees) :
-      weight(15103.00), gravity(-1.625), thrust(45000.00)
+   LM(const Point& ptUpperRight) : 
+      weight(15103), vThrust(45000),
+      hThrust(450), gravity(-1.625)
    {
-      pt.setX(position);
-      pt.setY(altitude);
-      v.setDX(horizontalVelocity);
-      v.setDY(verticalVelocity);
-      updateAngle(degrees);
+      pt.setX(ptUpperRight.getX() / 2.0);
+      pt.setY(ptUpperRight.getY() / 2.0);
+      v.setDX(0.00);
+      v.setDY(0.00); 
+      angle = 0.00;
+      fuel = 25000;
    }
 
-   /*************************************************************
-    * UPDATE ANGLE
-    * Converts the angle to radians from degrees.
-    *****************************************************************/
-   void updateAngle(int degrees)
+   void reset()
    {
-      angle = radiansFromDegrees(degrees);
+
    }
 
-   /*************************************************************
-    * APPLY INERTIA
-    * Changes the position of the LM by applying dx and dy.
-    *****************************************************************/
-   void applyInertia()
+   bool isDead()
    {
-      pt.addX(v.getDX());
-      pt.addY(v.getDY());
+
    }
 
-   /*************************************************************
-    * APPLY THRUST
-    * Applies the vertical and/or horizontal acceleration due to the force
-    * of the thrusters.
-    *****************************************************************/
-   void applyThrust()
+   bool isLanded()
    {
-      v.addDX(cos(angle) * thrust / weight);
-      v.addDY(sin(angle) * thrust / weight);
-   }
-   /*************************************************************
-    * APPLY GRAVITY
-    * Applies the downward acceleration due to gravity to dy.
-    *****************************************************************/
-   void applyGravity()
-   {
-      v.addDY(gravity);
+
    }
 
-   /*************************************************************
-    * TOTAL VELOCITY
-    * Returns the total velocity of the LM.
-    *****************************************************************/
-   double totalVelocity() const
+   bool isFlying()
    {
-      return v.getSpeed();
+
    }
+
+   Point getPosition()
+   {
+
+   }
+
+   int getFuel()
+   {
+
+   }
+
+   void draw(const Thrust& thrust)
 
 private:
-   /*************************************************************
-    * DEGREES FROM RADIANS and RADIANS FROM DEGREES
-    * Convert degrees to radians and vice-verse.
-    *****************************************************************/
-   double degreesFromRadians(double radians) const
-   {
-      return 360.0 * (radians / (2.0 * M_PI));
-   }
-   double radiansFromDegrees(double degrees) const
-   {
-      return (2.0 * M_PI) * (degrees / 360.0);
-   }
-
    // Attribute declarations
    Point pt;
    Point ptUpperRight;
@@ -95,6 +69,7 @@ private:
    double angle;
    double fuel;
    const double weight;
-   const double thrust;
+   const double vThrust;
+   const double hThrust;
    const double gravity;
 };
