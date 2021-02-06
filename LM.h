@@ -27,6 +27,7 @@ public:
           ptUpperRight.getX() / 2.0,
           ptUpperRight.getX() / 2.0
       );
+      center.set(point);
    }
    
    void update()
@@ -53,34 +54,18 @@ public:
 
    void reset()
    {
-
+      v.set(0,0);
+      point.set(center);
    }
 
-   bool isDead()
-   {
+   bool isAlive() { return alive; }
+   bool isLanded() { return landed; }
+   bool isFlying() { return !landed; }
 
-   }
+   Point getPosition() { return point; }
 
-   bool isLanded()
-   {
-
-   }
-
-   bool isFlying()
-   {
-
-   }
-
-   Point getPosition()
-   {
-
-   }
-
-   int getFuel()
-   {
-
-   }
-
+   double getFuel() { return fuel; }
+   
 private:
    /*************************************************************
     * DEGREES FROM RADIANS and RADIANS FROM DEGREES
@@ -98,6 +83,7 @@ private:
 
    // Attribute declarations
    Point point;
+   Point center;
    Point screenTopRight;
    Velocity v;
    double angle;
@@ -108,4 +94,6 @@ private:
    const double gravity;
    bool alive;
    bool landed;
+
+
 };

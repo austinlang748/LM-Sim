@@ -53,11 +53,11 @@ public:
       ground.draw(gout);
 
       // draw the lander and its flames
-      lm.draw();
+      lm.draw(gout, pUI);
 
       // put some text on the screen
       gout.setPosition(Point(30.0, 30.0));
-      gout << "Game (" << (int)lm.getPoisition().getX() << ", " << (int)lm.getY() << ")" << "\n";
+      gout << "LM Position (" << lm.getPosition().toString() << ")" << "\n";
    }
 
 private:
