@@ -73,8 +73,8 @@ public:
    void add(Velocity v) { add(v.getDX(), v.getDY()); }
     
    void add(double dx, double dy) {
-      x += dx;
-      y += dy;
+      x += dx/30;
+      y += dy/30;
    }
 
    Point & operator = (const Point & rhs)

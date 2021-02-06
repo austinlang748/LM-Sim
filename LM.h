@@ -20,8 +20,8 @@ public:
    LM(const Point& ptUpperRight) : 
       mass(15103),
       width(10),
-      thrustRotateAmount(450),
-      thrustAmountY(45000),
+      thrustRotateAmount(45000),
+      thrustAmountY(450),
       gravity(-1.625),
       angle(90.00),
       fuel(25000),
@@ -37,7 +37,7 @@ public:
    void update()
    {
       point.add(v);
-      v.addMagnitude(degreesToRadians(angle), gravity);
+      v.addMagnitude(degreesToRadians(90), gravity);
    }
    
    void draw(ogstream & gout, const Interface* pUI) const
@@ -57,7 +57,13 @@ public:
    {
       // accerate forward when up arrow is pressed
       if (pUI->isDown())
-         v.addMagnitude(degreesToRadians(angle), thrustAmountY);
+         v.addMagnitude(degreesToRadians(angle), thrustAmountY/100);
+      
+      if (pUI->isRight())
+         angle += thrustRotateAmount/10000;
+      
+      if (pUI->isLeft())
+         angle -= thrustRotateAmount/10000;
    }
 
    void reset()

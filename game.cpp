@@ -36,7 +36,6 @@ public:
     
    void update()
    {
-      cout << pause << endl;
       if (pause) return;
 
       // update ship
@@ -57,9 +56,9 @@ public:
 
    void draw(ogstream & gout, const Interface* pUI) const
    {
-       // draw stars
-       for (int i = 0; i < STARS_AMOUNT; i++)
-          stars[i].draw(gout);
+      // draw stars
+      for (int i = 0; i < STARS_AMOUNT; i++)
+         stars[i].draw(gout);
 
       // draw the ground
       ground.draw(gout);
@@ -70,15 +69,29 @@ public:
       // put some text on the screen
       gout.setPosition(Point(30.0, 30.0));
       gout << "LM Position (" << lm.getPosition().toString() << ")" << "\n";
+      
+      // display 'crashed'/'landed'
+      if (pause)
+      {
+         gout.setPosition(Point(280, 30.0));
+         if (lm.isAlive()) gout << "Landed\n";
+         else gout << "Crashed\n";
+      }
    }
 
 private:
    void checkCollisions()
    {
-      // stop game if lm has hit the ground
+      // stop game and display 'crashed' if lm hit the ground
       if (ground.hitGround(lm.getPosition(), lm.getWidth()))
          lm.setAlive(false);
       pause = !lm.isAlive();
+      
+      // stop game and display 'landed' if lm hit the ground
+      if (ground.onPlatform(lm.getPosition(), lm.getWidth()))
+      {
+         pause = true;
+      }
    }
 
    LM lm;                  // lunar module object
