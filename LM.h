@@ -60,6 +60,9 @@ public:
    }
 
    void draw(const Thrust& thrust)
+   {
+
+   }
 
 private:
    // Attribute declarations
