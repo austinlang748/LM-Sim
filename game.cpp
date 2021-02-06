@@ -22,7 +22,7 @@ class Game
 {
 public:
    Game(const Point& ptUpperRight) :
-          lm(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
+          lm(ptUpperRight),
           ground(ptUpperRight)
    { 
       // create stars to be put on the screen
