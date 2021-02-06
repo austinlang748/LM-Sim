@@ -91,8 +91,6 @@ private:
       return 360.0 * (radians / (2.0 * M_PI));
    }
 
-   void draw(const Thrust& thrust)
-
    // Attribute declarations
    Point point;
    Point screenTopRight;

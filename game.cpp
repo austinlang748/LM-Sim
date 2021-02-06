@@ -36,6 +36,8 @@ public:
    void update()
    {
       lm.update();
+      for (int i = 0; i < STARS_AMOUNT; i++)
+         stars[i].update();
    }
 
    void handleInput(const Interface *pUI)
@@ -53,16 +55,15 @@ public:
       ground.draw(gout);
 
       // draw the lander and its flames
-      lm.draw();
+      lm.draw(gout, pUI);
 
       // put some text on the screen
       gout.setPosition(Point(30.0, 30.0));
-      gout << "Game (" << (int)lm.getPoisition().getX() << ", " << (int)lm.getY() << ")" << "\n";
+      gout << "Game (" << (int)lm.getPosition().getX() << ", " << (int)lm.getY() << ")" << "\n";
    }
 
 private:
-   // this is just for test purposes.  Don't make member variables public!
-   LM lm;               // lunar module object
+   LM lm;                  // lunar module object
    Ground ground;          // object to keep track of ground attributes
    vector<Star> stars;     // dynamic list to keep track of stars
    Point ptUpperRight;     // size of the screen
@@ -91,7 +92,7 @@ void callBack(const Interface *pUI, void * p)
    // game::update() and game::draw()
    pGame->update();
    pGame->draw(gout, pUI);
-    pGame->handleInput(pUI);
+   pGame->handleInput(pUI);
 }
 
 /*********************************
