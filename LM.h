@@ -18,7 +18,7 @@ public:
       double verticalVelocity,
       double horizontalVelocity,
       double degrees) :
-      weight(15103.00), gravity(-1.625), thrust(45000.00)
+      mass(15103.00), gravity(-1.625), thrust(45000.00)
    {
       pt.setX(position);
       pt.setY(altitude);
@@ -47,12 +47,13 @@ public:
     * Applies the vertical and/or horizontal acceleration due to the force
     * of the thrusters.
     *****************************************************************/
-   void accelerate()
+   void accelerate(float accelerationAmount)
    {
-      v.addDX(cos(angle) * thrust / weight);
-      v.addDY(sin(angle) * thrust / weight);
+      v.addDX(cos(angle) * accelerationAmount / mass);
+      v.addDY(sin(angle) * accelerationAmount / mass);
    }
-   /*************************************************************
+
+    /*************************************************************
     * APPLY GRAVITY
     * Applies the downward acceleration due to gravity to dy.
     *****************************************************************/
@@ -90,6 +91,7 @@ private:
    {
       return 360.0 * (radians / (2.0 * M_PI));
    }
+   
    double radiansFromDegrees(double degrees) const
    {
       return (2.0 * M_PI) * (degrees / 360.0);
@@ -101,7 +103,7 @@ private:
    Velocity v;
    double angle;
    double fuel;
-   const double weight;
+   const double mass;
    const double thrust;
    const double gravity;
 };

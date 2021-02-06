@@ -21,7 +21,8 @@ public:
     }
 
     void update() {
-        // TODO: update star phase here
+        if (phase >= 255) phase = 0;
+        phase++;
     }
 
     void draw(ogstream & gout) const {
