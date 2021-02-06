@@ -58,8 +58,10 @@ public:
       lm.draw(gout, pUI);
 
       // put some text on the screen
-      gout.setPosition(Point(30.0, 30.0));
+      gout.setPosition(Point(30.0, 280.0));
       gout << "LM Position (" << lm.getPosition().toString() << ")" << "\n";
+      //gout.setPosition(Point(30.0, 170.0));
+      //gout << "LM Speed (" << lm.getVelocity().getSpeed() << ")" << "\n";
    }
 
 private:

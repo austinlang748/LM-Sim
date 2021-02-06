@@ -68,6 +68,8 @@ public:
    Point getPosition() const { return point; }
 
    double getFuel() { return fuel; }
+
+   Velocity getVelocity() { return v; }
    
 private:
    /*************************************************************
