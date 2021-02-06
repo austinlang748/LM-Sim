@@ -42,6 +42,11 @@ public:
       addDx(ddx);
       addDy(ddy);
    }
+   
+   void addMagnitude(double angleRad, double magnitude)
+   {
+      add(magnitude * cos(angleRad), magnitude * sin(angleRad));
+   }
     
    void add(Velocity acceleration)
    {

@@ -34,7 +34,12 @@ public:
    
    string toString() const
    {
-      return ("(" + (string)x + ", " + (string)y + ")");
+      string pointstr = "(";
+      pointstr += x;
+      pointstr += ", ";
+      pointstr += y;
+      pointstr += ")";
+      return pointstr;
    }
    
    bool operator == (const Point & rhs) const
