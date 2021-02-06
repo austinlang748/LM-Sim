@@ -50,7 +50,7 @@ public:
     }
 
     void translate(Velocity v) {
-        add(v.getDx(), v.getDy());
+        add(v.getDX(), v.getDY());
     }
 
     void addX(double dx)      { setX(getX() + dx);     }

@@ -24,26 +24,22 @@ public:
       pt.setY(altitude);
       v.setDX(horizontalVelocity);
       v.setDY(verticalVelocity);
-      updateAngle(degrees);
+      setAngle(degrees);
    }
+    
+    /*************************************************************
+     * UPDATE
+     * This function gets called once per frame.
+     * Put point.translate here.
+     *****************************************************************/
 
    /*************************************************************
-    * UPDATE ANGLE
+    * SET ANGLE
     * Converts the angle to radians from degrees.
     *****************************************************************/
-   void updateAngle(int degrees)
+   void setAngle(int degrees)
    {
       angle = radiansFromDegrees(degrees);
-   }
-
-   /*************************************************************
-    * APPLY INERTIA
-    * Changes the position of the LM by applying dx and dy.
-    *****************************************************************/
-   void applyInertia()
-   {
-      pt.addX(v.getDX());
-      pt.addY(v.getDY());
    }
 
    /*************************************************************
@@ -51,7 +47,7 @@ public:
     * Applies the vertical and/or horizontal acceleration due to the force
     * of the thrusters.
     *****************************************************************/
-   void applyThrust()
+   void accelerate()
    {
       v.addDX(cos(angle) * thrust / weight);
       v.addDY(sin(angle) * thrust / weight);
@@ -73,11 +69,22 @@ public:
    {
       return v.getSpeed();
    }
+    
+   /*****************************************************************
+    * GET POINT
+    * Game will need to know where the Lander is
+    * in order for Ground to decide whether LM has
+    * landed or not.
+    ******************************************************************/
+    Point getPoint() const
+    {
+        return pt;
+    }
 
 private:
    /*************************************************************
     * DEGREES FROM RADIANS and RADIANS FROM DEGREES
-    * Convert degrees to radians and vice-verse.
+    * Convert degrees to radians and vice-versa.
     *****************************************************************/
    double degreesFromRadians(double radians) const
    {
