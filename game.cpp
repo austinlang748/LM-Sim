@@ -36,10 +36,10 @@ public:
     
    void update()
    {
-      if (pause) return;
-
-      // update ship
-      lm.update();
+      if (!pause) {
+         // update lunar module
+         lm.update();
+      }
 
       // update stars phases
       for (int i = 0; i < STARS_AMOUNT; i++)
@@ -51,7 +51,10 @@ public:
 
    void handleInput(const Interface *pUI)
    {
-      lm.handleInput(pUI);
+      if (!pause) {
+         // handle lunar module input
+         lm.handleInput(pUI);
+      }
    }
 
    void draw(ogstream & gout, const Interface* pUI) const
