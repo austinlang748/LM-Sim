@@ -9,13 +9,13 @@
 
 #include "point.h"
 
-#include <cassert>
+using namespace std;
 
 /******************************************
  * POINT insertion
  *       Display coordinates on the screen
  *****************************************/
-std::ostream & operator << (std::ostream & out, const Point & pt)
+ostream & operator << (ostream & out, const Point & pt)
 {
    out << "(" << pt.getX() << ", " << pt.getY() << ")";
    return out;
@@ -25,7 +25,7 @@ std::ostream & operator << (std::ostream & out, const Point & pt)
  * POINT extraction
  *       Prompt for coordinates
  ******************************************/
-std::istream & operator >> (std::istream & in, Point & pt)
+istream & operator >> (istream & in, Point & pt)
 {
    double x;
    double y;

@@ -5,8 +5,9 @@
 
 #pragma once
 
-#include <cmath>
 #include <iostream>
+#include <cmath>
+#include <cassert>
 using namespace std;
 
 class Velocity
@@ -18,16 +19,28 @@ public:
       dy = dy_init;
    }
 
-   double getDx() { return dx; }
-   double getDy() { return dy; }
+   // getters
+   double getDx() const { return dx; }
+   double getDy() const { return dy; }
    
    double getSpeed() const
    {
       return sqrt(dx * dx + dy * dy);
    }
-
-   void setDx(double newDX) { dx = newDX; }
-   void setDy(double newDY) { dy = newDY; }
+   
+   bool operator == (const Velocity & rhs) const
+   {
+      return dx == rhs.dx && dy == rhs.dy;
+   }
+   
+   bool operator != (const Velocity & rhs) const
+   {
+      return dx != rhs.dx || dy != rhs.dy;
+   }
+   
+   // setters
+   void setDx(double newDx) { dx = newDx; }
+   void setDy(double newDy) { dy = newDy; }
    void set(Velocity v) { set(v.dx, v.dy); }
    
    void set(double dx, double dy)
@@ -36,6 +49,7 @@ public:
       setDy(dy);
    }
    
+   // adders
    void addDx(double dxAdd) { dx += dxAdd; }
    void addDy(double dyAdd) { dy += dyAdd; }
    
@@ -62,4 +76,4 @@ private:
 
 // stream I/O used by gout and useful for debugging
 ostream & operator << (ostream & out, const Velocity & v);
-istream & operator >> (istream & in, Velocity & v);
+istream & operator >> (istream & in,        Velocity & v);

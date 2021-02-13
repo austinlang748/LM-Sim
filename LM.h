@@ -21,7 +21,8 @@ public:
       gravity(-1.625),
       angle(90.00),
       fuel(25000),
-      alive(true)
+      alive(true),
+      landed(false)
    {
       point.set(
           ptUpperRight.getX() / 2.0,
@@ -32,6 +33,7 @@ public:
    
    void update()
    {
+      if (landed) return;
       point.add(v);
       v.addMagnitude(degreesToRadians(90), gravity);
    }
@@ -96,6 +98,7 @@ public:
    bool     isAlive()      const { return alive;   }
    bool     isLanded()     const { return landed;  }
    bool     isFlying()     const { return !landed; }
+   double   getAngle()     const { return angle;   }
    double   getFuel()      const { return fuel;    }
    double   getWidth()     const { return width;   }
    Point    getPosition()  const { return point;   }

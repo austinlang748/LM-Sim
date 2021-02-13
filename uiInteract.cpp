@@ -197,6 +197,7 @@ void Interface::keyEvent(int key, bool fDown)
 
 /*****************************************************
  * INTERFACE : GET/SET HELD KEY
+ * Author: Elijah Harrison
  * Basic Getter/Setter to see if key is being held
  *****************************************************/
 bool Interface::getHeldKey(int key) const

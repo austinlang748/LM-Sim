@@ -13,6 +13,7 @@
 #include "velocity.h"
 
 #include <iostream>
+#include <cassert>
 using namespace std;
 
 /*********************************************
@@ -74,11 +75,10 @@ public:
    }
 
 private:
-    double x;           // horizontal position
-    double y;           // vertical position
+    double x;  // horizontal position
+    double y;  // vertical position
 };
 
-// stream I/O useful for debugging
-ostream & operator << (std::ostream & out, const Point & pt);
-istream & operator >> (std::istream & in,        Point & pt);
-
+// stream I/O used by gout and useful for debugging
+ostream & operator << (ostream & out, const Point & pt);
+istream & operator >> (istream & in,        Point & pt);

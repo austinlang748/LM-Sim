@@ -93,10 +93,6 @@ bool Ground::hitGround(const Point& position, int landerWidth) const
       if (ground[i] > maxElevation)
          maxElevation = ground[i];
 
-   // debug
-   if (position.getY() < maxElevation) cout << "hit ground!" << endl;
-   else cout << "still flying" << endl;
-
    return position.getY() < maxElevation;
 }
 

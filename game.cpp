@@ -35,14 +35,33 @@ public:
          stars.push_back(Star());
       
       // initialize points
-      textBottomLeft = Point(20, 20);
-      textBottomRight = Point(ptUpperRight.getX() - 20, 20);
-      textTopLeft = Point(20, ptUpperRight.getY() - 20);
-      textTopRight = Point(ptUpperRight.getX() - 20, ptUpperRight.getY() - 20);
+      textBottomLeft = Point(10, 20);
+      
+      textBottomRight = Point(ptUpperRight.getX() - 80, 20);
+      
+      textTopLeft = Point(10, ptUpperRight.getY() - 20);
+      
+      textTopRight = Point(
+         ptUpperRight.getX() - 80,
+         ptUpperRight.getY() - 20
+      );
+      
+      textCenter = Point(
+         ptUpperRight.getX()/2 - 40,
+         ptUpperRight.getY()/2
+      );
+      
+      textBottomCenter = Point(textCenter.getX(), 20);
+
+      textTopCenter = Point(
+         textCenter.getX(),
+         ptUpperRight.getY() - 20
+      );
    }
     
    void update()
    {
+      cout << pause << endl;
       if (!pause) {
          // update lunar module
          lm.update();
@@ -98,35 +117,70 @@ private:
    {
       // stop game and display 'crashed' if lm hit the ground
       if (ground.hitGround(lm.getPosition(), lm.getWidth()))
+      {
          lm.crash();
+         pause = true;
+      }
 
       // stop game and display 'landed' if lm hit the ground
       if (ground.onPlatform(lm.getPosition(), lm.getWidth()))
+      {
          lm.land();
-      
-      pause = lm.isLanded();
+         pause = true;
+      }
    }
    
    void drawText(ogstream & gout) const
    {
-      // display lander position info
-      gout.setPosition(textBottomLeft);
-      gout << "LM Position " << lm.getPosition() << "\n";
-
-      // display lander velocity info
-      gout.setPosition(
-         Point(textBottomLeft.getX(),
-               textBottomLeft.getY() - 20)
-         );
-      gout << "LM Velocity " << lm.getVelocity() << "\n";
+      /* TOP - display menu options */
+   
+      // "quit == q"
+      gout.setPosition(textTopRight);
+      gout << "Q - Quit";
       
-      // display 'crashed'/'landed'
+      // "pause == spc"
+      gout.setPosition(textTopLeft);
+      if (pause)  gout << "SPACE - Resume";
+      else        gout << "SPACE - Pause";
+      
+      /* CENTER - display state */
+
+      gout.setPosition(textCenter);
+
+      // landed/crashed
       if (lm.isLanded())
       {
-         gout.setPosition(Point(280, 30.0));
-         if (lm.isAlive()) gout << "Landed\n";
-         else              gout << "Crashed\n";
+         if (lm.isAlive()) gout << "Landed";
+         else              gout << "Crashed";
       }
+      
+      // paused
+      else if (pause)
+      {
+         gout << "Paused";
+      }
+
+      /* BOTTOM - lander info */
+
+      // lander position
+      gout.setPosition(
+         Point(textBottomLeft.getX(),
+               textBottomLeft.getY() + 40)
+         );
+      gout << "LM Position " << lm.getPosition();
+      
+      // lm velocity (dx, dy)
+      gout.setPosition(
+         Point(textBottomLeft.getX(),
+               textBottomLeft.getY() + 20)
+         );
+      gout << "LM Velocity " << lm.getVelocity();
+      
+      // lm velocity (angle, magnitude)
+      gout.setPosition(textBottomLeft);
+      gout << "LM Angle " << lm.getAngle();
+      gout.setPosition(textBottomCenter);
+      gout << "LM Speed " << lm.getVelocity().getSpeed();
    }
 
    /* simulator objects */
@@ -139,10 +193,14 @@ private:
    bool restart;           // flag for callback to use in order to restart game
    bool pause;             // flag for updating screen/objects
    int pauseButtonTimer;
+
    Point textBottomLeft;
    Point textBottomRight;
    Point textTopLeft;
    Point textTopRight;
+   Point textCenter;
+   Point textBottomCenter;
+   Point textTopCenter;
 };
 
 /*************************************

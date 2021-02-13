@@ -7,11 +7,13 @@
 
 #include "velocity.h"
 
+using namespace std;
+
 /******************************************
  * VELOCITY insertion
  *       Display coordinates on the screen
  *****************************************/
-std::ostream & operator << (std::ostream & out, const Velocity & v)
+ostream & operator << (ostream & out, const Velocity & v)
 {
    out << "(" << v.getDx() << ", " << v.getDy() << ")";
    return out;
@@ -21,7 +23,7 @@ std::ostream & operator << (std::ostream & out, const Velocity & v)
  * VELOCITY extraction
  *       Prompt for coordinates
  ******************************************/
-std::istream & operator >> (std::istream & in, Velocity & v)
+istream & operator >> (istream & in, Velocity & v)
 {
    double x;
    double y;
@@ -32,4 +34,3 @@ std::istream & operator >> (std::istream & in, Velocity & v)
 
    return in;
 }
-   
