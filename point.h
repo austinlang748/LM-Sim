@@ -13,7 +13,6 @@
 #include "velocity.h"
 
 #include <iostream>
-#include <string>
 using namespace std;
 
 /*********************************************
@@ -31,16 +30,6 @@ public:
    // getters
    double getX() const { return x; }
    double getY() const { return y; }
-   
-   string toString() const
-   {
-      string pointstr = "(";
-      pointstr += x;
-      pointstr += ", ";
-      pointstr += y;
-      pointstr += ")";
-      return pointstr;
-   }
    
    bool operator == (const Point & rhs) const
    {
@@ -64,13 +53,13 @@ public:
    }
 
    void translate(Velocity v) {
-      add(v.getDX(), v.getDY());
+      add(v.getDx(), v.getDy());
    }
 
    void addX(double dx) { setX(getX() + dx); }
    void addY(double dy) { setY(getY() + dy); }
    
-   void add(Velocity v) { add(v.getDX(), v.getDY()); }
+   void add(Velocity v) { add(v.getDx(), v.getDy()); }
     
    void add(double dx, double dy) {
       x += dx/30;

@@ -18,6 +18,19 @@
 
 #include "point.h"
 #include <algorithm> // used for min() and max() (specifically required by Visual Studio)
+#include <unordered_map> // used to hash heldKeys<bool>
+
+enum keys
+{
+   SPACE,
+   LEFT,
+   RIGHT,
+   DOWN,
+   UP,
+   Q,
+   R
+};
+
 using std::min;
 using std::max;
 
@@ -56,19 +69,15 @@ public:
    void setFramesPerSecond(double value);
    
    // Key event indicating a key has been pressed or not.  The callbacks
-   // should be the only onces to call this
+   // should be the only ones to call this
    void keyEvent(int key, bool fDown);
-   void keyEvent();
+   
+   // Get/Set various key events
+   bool getHeldKey(int key) const;
+   void setHeldKey(int key, bool value);
 
    // Current frame rate
-   double frameRate() const { return timePeriod;   };
-   
-   // Get various key events
-   int  isDown()      const { return isDownPress;  };
-   int  isUp()        const { return isUpPress;    };
-   int  isLeft()      const { return isLeftPress;  };
-   int  isRight()     const { return isRightPress; };
-   bool isSpace()     const { return isSpacePress; };
+   double frameRate() const { return timePeriod;      }
    
    static void *p;                   // for client
    static void (*callBack)(const Interface *, void *);
@@ -79,12 +88,8 @@ private:
    static bool         initialized;  // only run the constructor once!
    static double       timePeriod;   // interval between frame draws
    static unsigned long nextTick;     // time (from clock()) of our next draw
-
-   static int  isDownPress;          // is the down arrow currently pressed?
-   static int  isUpPress;            //    "   up         "
-   static int  isLeftPress;          //    "   left       "
-   static int  isRightPress;         //    "   right      "
-   static bool isSpacePress;         //    "   space      "
+   
+   static std::unordered_map<int, bool> heldKeys;
 };
 
 

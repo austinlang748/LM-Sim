@@ -104,9 +104,6 @@ void drawCallback()
 
    // bring forth the background buffer
    glutSwapBuffers();
-
-   // clear the space at the end
-   ui.keyEvent();
 }
 
 /************************************************************************
@@ -171,41 +168,45 @@ void Interface::keyEvent(int key, bool fDown)
    switch(key)
    {
       case GLUT_KEY_DOWN:
-         isDownPress = fDown;
+         setHeldKey(DOWN, fDown);
          break;
       case GLUT_KEY_UP:
-         isUpPress = fDown;
+         setHeldKey(UP, fDown);
          break;
       case GLUT_KEY_RIGHT:
-         isRightPress = fDown;
+         setHeldKey(RIGHT, fDown);
          break;
       case GLUT_KEY_LEFT:
-         isLeftPress = fDown;
+         setHeldKey(LEFT, fDown);
+         break;
+      case 113:
+         setHeldKey(Q, fDown);
+         break;
+      case 114:
+         setHeldKey(R, fDown);
          break;
       case GLUT_KEY_HOME:
       case ' ':
-         isSpacePress = fDown;
+         setHeldKey(SPACE, fDown);
+         break;
+      default:
+         cout << key << endl;
          break;
    }
 }
 
-/***************************************************************
- * INTERFACE : KEY EVENT
- * Either set the up or down event for a given key
- *   INPUT   key     which key is pressed
- *           fDown   down or brown
- ****************************************************************/
-void Interface::keyEvent()
+/*****************************************************
+ * INTERFACE : GET/SET HELD KEY
+ * Basic Getter/Setter to see if key is being held
+ *****************************************************/
+bool Interface::getHeldKey(int key) const
 {
-   if (isDownPress)
-      isDownPress++;
-   if (isUpPress)
-      isUpPress++;
-   if (isLeftPress)
-      isLeftPress++;
-   if (isRightPress)
-      isRightPress++;
-   isSpacePress = false;
+   return heldKeys[key];
+}
+
+void Interface::setHeldKey(int key, bool value)
+{
+   heldKeys[key] = value;
 }
 
 /************************************************************************
@@ -245,16 +246,25 @@ void Interface::setFramesPerSecond(double value)
  * All the static member variables need to be initialized
  * Somewhere globally.  This is a good spot
  **************************************************/
-int          Interface::isDownPress  = 0;
-int          Interface::isUpPress    = 0;
-int          Interface::isLeftPress  = 0;
-int          Interface::isRightPress = 0;
-bool         Interface::isSpacePress = false;
-bool         Interface::initialized  = false;
-double       Interface::timePeriod   = 1.0 / 30; // default to 30 frames/second
-unsigned long Interface::nextTick     = 0;        // redraw now please
-void *       Interface::p            = NULL;
+bool           Interface::initialized  = false;
+double         Interface::timePeriod   = 1.0 / 30; // default to 30 frames/second
+unsigned long  Interface::nextTick     = 0;        // redraw now please
+void *         Interface::p            = NULL;
+
+// set callback to null
 void (*Interface::callBack)(const Interface *, void *) = NULL;
+
+// held keys
+std::unordered_map<int, bool> Interface::heldKeys {
+    {  { SPACE,   false },
+       { LEFT,    false },
+       { RIGHT,   false },
+       { DOWN,    false },
+       { UP,      false },
+       { Q,       false },
+       { R,       false }
+    }
+};
 
 
 /************************************************************************

@@ -39,7 +39,7 @@ public:
 	void update(const Interface* pUI)
 	{
 		// move the ship around
-		if (pUI->isRight())
+		if (pUI->getHeldKey(right))
 			counterClockwise = true;
 		if (pUI->isLeft())
 			clockwise = true;

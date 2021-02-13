@@ -3,15 +3,11 @@
  * Represents both the position and velocity of the LM.
  *****************************************************************/
 
-#include "math.h"
-#include "point.h"
-#include "velocity.h"
-#include "point.h"
-#include "thrust.h"
+#include "point.h"      // import Point class
+#include "velocity.h"   // import Velocity class
+#include "uiInteract.h" // import keys (enum) from file (global scope)
 
-#ifndef M_PI              // Define M_PI (within class)
-#define M_PI 3.14159265358979323846
-#endif
+#include <math.h>       // import M_PI
 
 
 class LM
@@ -45,25 +41,50 @@ public:
       // draw lander
       gout.drawLander(point, degreesToRadians(angle - 90));
 
-      // draw flames (direction based on key input)
+      // don't draw flames when landed
+      if (landed) return;
 
+      // draw flames (direction based on key input)
       gout.drawLanderFlames(
-         point, degreesToRadians(angle - 90),
-         pUI->isDown(), pUI->isLeft(), pUI->isRight()
+          point, degreesToRadians(angle - 90),
+          pUI->getHeldKey(DOWN),
+          pUI->getHeldKey(LEFT),
+          pUI->getHeldKey(RIGHT)
       );
    }
    
    void handleInput(const Interface * pUI)
    {
+      // don't update input values when landed
+      if (landed) return;
+
       // accerate forward when up arrow is pressed
-      if (pUI->isDown())
+      if (pUI->getHeldKey(DOWN))
          v.addMagnitude(degreesToRadians(angle), thrustAmountY/100);
       
-      if (pUI->isRight())
-         angle += thrustRotateAmount/10000;
-      
-      if (pUI->isLeft())
+      if (pUI->getHeldKey(LEFT)) {
          angle -= thrustRotateAmount/10000;
+      }
+      
+      if (pUI->getHeldKey(RIGHT))
+         angle += thrustRotateAmount/10000;
+   }
+   
+   void hit()
+   {
+      setAlive(false);
+      setLanded(true);
+   }
+   
+   void crash()
+   {
+      hit();
+   }
+   
+   void land()
+   {
+      setAlive(true);
+      setLanded(true);
    }
 
    void reset()
@@ -72,14 +93,16 @@ public:
       point.set(center);
    }
 
-   bool  isAlive()      const { return alive; }
-   bool  isLanded()     const { return landed; }
-   bool  isFlying()     const { return !landed; }
-   Point getPosition()  const { return point; }
-   double getFuel()     const { return fuel; }
-   double getWidth()    const { return width; }
+   bool     isAlive()      const { return alive;   }
+   bool     isLanded()     const { return landed;  }
+   bool     isFlying()     const { return !landed; }
+   double   getFuel()      const { return fuel;    }
+   double   getWidth()     const { return width;   }
+   Point    getPosition()  const { return point;   }
+   Velocity getVelocity()  const { return v;       }
    
-   void setAlive(bool value) { alive = value; }
+   void setAlive(bool value)     { alive = value;  }
+   void setLanded(bool value)    { landed = value; }
    
 private:
    /*************************************************************

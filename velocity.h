@@ -6,6 +6,8 @@
 #pragma once
 
 #include <cmath>
+#include <iostream>
+using namespace std;
 
 class Velocity
 {
@@ -16,8 +18,8 @@ public:
       dy = dy_init;
    }
 
-   double getDX() { return dx; }
-   double getDY() { return dy; }
+   double getDx() { return dx; }
+   double getDy() { return dy; }
    
    double getSpeed() const
    {
@@ -57,3 +59,7 @@ private:
    double dx;
    double dy;
 };
+
+// stream I/O used by gout and useful for debugging
+ostream & operator << (ostream & out, const Velocity & v);
+istream & operator >> (istream & in, Velocity & v);
