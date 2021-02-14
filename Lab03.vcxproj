@@ -24,10 +24,10 @@
     <ClCompile Include="point.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
+    <ClCompile Include="velocity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ground.h" />
-    <ClInclude Include="thrust.h" />
     <ClInclude Include="velocity.h" />
     <ClInclude Include="LM.h" />
     <ClInclude Include="point.h" />

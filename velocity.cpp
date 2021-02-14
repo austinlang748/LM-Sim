@@ -1,28 +1,32 @@
-//
-//  velocity.cpp
-//  Lab03
-//
-//  Created by Elijah Harrison on 2/13/21.
-//
+/**************************************************************************
+ * velocity.cpp
+ *
+ * Author: Elijah Harrison
+ * Date: 02/13/2021
+ *
+ * Contains code for velocity insertion and extraction. 
+ **************************************************************************/
 
 #include "velocity.h"
 
 using namespace std;
 
-/******************************************
- * VELOCITY insertion
- *       Display coordinates on the screen
- *****************************************/
+/**************************************************************************
+ * VELOCITY INSERTION
+ *  
+ * Display coordinates on the screen. 
+ **************************************************************************/
 ostream & operator << (ostream & out, const Velocity & v)
 {
    out << "(" << v.getDx() << ", " << v.getDy() << ")";
    return out;
 }
 
-/*******************************************
- * VELOCITY extraction
- *       Prompt for coordinates
- ******************************************/
+/**************************************************************************
+ * VELOCITY EXTRACTION
+ *
+ * Prompt for coordinates. 
+ **************************************************************************/
 istream & operator >> (istream & in, Velocity & v)
 {
    double x;
